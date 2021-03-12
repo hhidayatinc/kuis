@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'input.dart';
+
+
 void main() {
   runApp(MyApp());
 }
@@ -14,7 +15,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   TextEditingController inputTitle = new TextEditingController();
   TextEditingController inputDetail = new TextEditingController();
-  List<File> listHasilItem = [];
+  //List<File> listHasilItem = [];
   String _inputTitle = " ";
   String _inputDetail = " ";
   
@@ -23,7 +24,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
        _inputTitle = inputTitle.text;
        _inputDetail = inputDetail.text;
-      listHasilItem.add(File("$_inputTitle", "$inputDetail"));
+      //listHasilItem.add(File("$_inputTitle", "$inputDetail"));
     });
   }
 
@@ -32,57 +33,72 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        //primarySwatch: Colors.yellow,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Catatan Sederhana"),
+          backgroundColor: Colors.yellow[700],
+          title: Text("Simple Notes"),
         ),
         body: Container(
             margin: EdgeInsets.all(8),
             child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  //mainAxisAlignment: MainAxisAlignment.center,
+                  
                   children: [
                     Container(
-                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.symmetric(vertical: 8.0),
                       child: TextFormField(
                         controller: inputTitle,
-                        decoration: InputDecoration(hintText: "Insert Title"),
-                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: "Title"),
+                          keyboardType: TextInputType.text,
                         inputFormatters: <TextInputFormatter>[
                           LengthLimitingTextInputFormatter(50)
                         ],
                       ),
                     ),
+                    SizedBox(height: 8.0,),
                     Container(
-                      margin: EdgeInsets.all(10),
+                     
+                      padding: EdgeInsets.symmetric(vertical: 8.0),
                       child: TextFormField(
                         controller: inputDetail,
-                        decoration: InputDecoration(hintText: "Insert Text"),
-                        keyboardType: TextInputType.text,
-                        inputFormatters: <TextInputFormatter>[
-                          LengthLimitingTextInputFormatter(100)
-                        ],
+                        decoration: InputDecoration(
+                          hintText: "Insert Text",
+                          border: new OutlineInputBorder(
+                            
+                          ),
+                          ),
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        
                       ),
+                      
                     ),
-                    RaisedButton(
-                      onPressed: input,
-                      color: Colors.blueAccent,
-                      child: Text(
-                        "Save",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    )
+                    SizedBox(height: 8.0,),
+                    Container(
+                      width: double.infinity,
+                      height: 40,
+                      child: RaisedButton(
+                        onPressed:(){},
+                        color: Colors.yellow[700],
+                        child: Text("Save", style: TextStyle(color: Colors.white, fontSize: 17)),
+                        ),
+                    
+                  
+                    ),
+                  
                   ],
                 ),
-                ListView(
-                  children: listHasilItem.map((){
-
-                  }),
-                ),
+                
+                
               ],
               
             ),
