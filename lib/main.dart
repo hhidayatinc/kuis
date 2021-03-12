@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'input.dart';
+//import 'input.dart';
 
 
 
@@ -17,20 +17,20 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   TextEditingController inputTitle = new TextEditingController();
   TextEditingController inputDetail = new TextEditingController();
-  List<HimpunanNotes> listHasilItem = [];
-  //List<String> listHasilItem = [];
-  List<String> listTitle = [];
-  List<String> listDetail = [];
-  //String _inputTitle = " ";
-  //String _inputDetail = " ";
+  //List<HimpunanNotes> listHasilItem = [];
+  List<String> listHasilItem = [];
+  //List<String> listTitle = [];
+  //List<String> listDetail = [];
+  String _inputTitle = " ";
+  String _inputDetail = " ";
   
 
-  void inputCtatan() {
+  void inputCatatan() {
     setState(() {
-       //_inputTitle = inputTitle.text;
-      //_inputDetail = inputDetail.text;
-      listHasilItem.add(HimpunanNotes("$listTitle", "$listDetail"));
-      //listHasilItem.add("$_inputTitle: $_inputDetail");
+       _inputTitle = inputTitle.text;
+      _inputDetail = inputDetail.text;
+      //listHasilItem.add(HimpunanNotes("$listTitle", "$listDetail"));
+      listHasilItem.add("$_inputTitle" "$_inputDetail");
     });
   }
 
@@ -63,7 +63,7 @@ class _MyAppState extends State<MyApp> {
                           border: OutlineInputBorder(),
                           hintText: "Title"),
                           keyboardType: TextInputType.text,
-                        inputFormatters: <TextInputFormatter>[
+                          inputFormatters: <TextInputFormatter>[
                           LengthLimitingTextInputFormatter(50)
                         ],
                       ),
@@ -87,16 +87,32 @@ class _MyAppState extends State<MyApp> {
                       width: double.infinity,
                       height: 40,
                       child: RaisedButton(
-                        onPressed: inputCtatan,
+                        onPressed: inputCatatan,
                         color: Colors.yellow[700],
                         child: Text("Save", style: TextStyle(color: Colors.white, fontSize: 17)),
                         ),
                     ),
-                    ListView(
-                      children: listHasilItem.map((){
-                        
-                      }),
-                    )
+                    SizedBox(height: 10.0),
+                    Container(
+                      margin: EdgeInsets.only(top: 10, bottom: 10),
+                      child: Text(
+                        "Your Notes",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListView(
+                        children: listHasilItem.map((String value) {
+                         return Container(
+                           margin: EdgeInsets.all(10),
+                           child: Text(
+                             value,
+                             style: TextStyle(fontSize: 17), 
+                             ),
+                         );
+                    }).toList()
+                    ),
+                    ),
                   ],
                 ),
                ],
