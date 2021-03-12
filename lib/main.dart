@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-//import 'input.dart';
+import 'input.dart';
+import 'notes.dart';
 
 
 
@@ -17,21 +18,25 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   TextEditingController inputTitle = new TextEditingController();
   TextEditingController inputDetail = new TextEditingController();
-  //List<HimpunanNotes> listHasilItem = [];
-  List<String> listHasilItem = [];
-  //List<String> listTitle = [];
-  //List<String> listDetail = [];
-  String _inputTitle = " ";
-  String _inputDetail = " ";
+  List<String> listHasilItem = []; //menyimpan hasil inputan user
+  String _inputTitle = " "; //atribute bersifat private
+  String _inputDetail = " "; //atribute bersifat private
   
-
+//fungsi menambah notes
   void inputCatatan() {
     setState(() {
        _inputTitle = inputTitle.text;
       _inputDetail = inputDetail.text;
-      //listHasilItem.add(HimpunanNotes("$listTitle", "$listDetail"));
-      listHasilItem.add("$_inputTitle" 
-      "$_inputDetail");
+       listHasilItem.add("$_inputTitle           " "            $_inputDetail"); //untuk menyimpan hasilnya
+       inputTitle.clear(); //menghilangkan input an sebelumnya
+       inputDetail.clear();//menghilangkan input an sebelumnya
+    });
+  }
+
+//fungsi untuk menghapus semua notes
+  void clearAll(){
+    setState(() {
+      listHasilItem.clear();
     });
   }
 
@@ -39,13 +44,13 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Kuis 1 - Catatan Sederhana',
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.yellow[700],
+          backgroundColor: Colors.teal[200],
           title: Text("Simple Notes"),
         ),
         body: Container(
@@ -54,73 +59,12 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
-                        controller: inputTitle,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: "Title"),
-                          keyboardType: TextInputType.text,
-                          inputFormatters: <TextInputFormatter>[
-                          LengthLimitingTextInputFormatter(50)
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 8.0,),
-                    Container(
-                     padding: EdgeInsets.symmetric(vertical: 8.0),
-                      child: TextFormField(
-                        controller: inputDetail,
-                        decoration: InputDecoration(
-                          hintText: "Insert Text",
-                          border: new OutlineInputBorder(
-                          ),
-                          ),
-                         
-                        keyboardType: TextInputType.multiline,
-                        maxLines: null,
-                        ),
-                     ),
-                    SizedBox(height: 8.0,),
-                    Container(
-                      width: double.infinity,
-                      height: 40,
-                      child: RaisedButton(
-                        onPressed: inputCatatan,
-                        color: Colors.yellow[700],
-                        child: Text("Save", style: TextStyle(color: Colors.white, fontSize: 17)),
-                        ),
-                    ),
-                    SizedBox(height: 10.0),
-                    Container(
-                      margin: EdgeInsets.only(top: 10, bottom: 10),
-                      child: Text(
-                        "Your Notes",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ),
-                  ],
-                ),
+                InputFormButton(inputTitle: inputTitle, 
+                inputDetail: inputDetail, 
+                inputCatatan: inputCatatan,
+                clearAll: clearAll),
                 Expanded(
-                     child: GridView.count(
-                       padding: const EdgeInsets.all(10),
-                       crossAxisSpacing: 16,
-                       mainAxisSpacing: 15,
-                       crossAxisCount: 2,
-                       children: listHasilItem.map((String value) {
-                         return Container(
-                           padding: const EdgeInsets.all(15),
-                           child: Text(
-                             value,
-                             style: TextStyle(fontSize: 20, color: Colors.white),
-                           ),
-                           color: Colors.yellow[700],
-                         );
-                       }).toList(),
-                      ),
+                     child: Notes(listHasilItem: listHasilItem),
                 ),
                ],
             ),
@@ -129,3 +73,4 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
