@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'input.dart';
+
 
 
 void main() {
@@ -15,25 +17,29 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   TextEditingController inputTitle = new TextEditingController();
   TextEditingController inputDetail = new TextEditingController();
-  //List<File> listHasilItem = [];
-  String _inputTitle = " ";
-  String _inputDetail = " ";
+  List<HimpunanNotes> listHasilItem = [];
+  //List<String> listHasilItem = [];
+  List<String> listTitle = [];
+  List<String> listDetail = [];
+  //String _inputTitle = " ";
+  //String _inputDetail = " ";
   
 
-  void input() {
+  void inputCtatan() {
     setState(() {
-       _inputTitle = inputTitle.text;
-       _inputDetail = inputDetail.text;
-      //listHasilItem.add(File("$_inputTitle", "$inputDetail"));
+       //_inputTitle = inputTitle.text;
+      //_inputDetail = inputDetail.text;
+      listHasilItem.add(HimpunanNotes("$listTitle", "$listDetail"));
+      //listHasilItem.add("$_inputTitle: $_inputDetail");
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        //primarySwatch: Colors.yellow,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
@@ -48,8 +54,6 @@ class _MyAppState extends State<MyApp> {
             crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Column(
-                  //mainAxisAlignment: MainAxisAlignment.center,
-                  
                   children: [
                     Container(
                       padding: EdgeInsets.symmetric(vertical: 8.0),
@@ -66,44 +70,34 @@ class _MyAppState extends State<MyApp> {
                     ),
                     SizedBox(height: 8.0,),
                     Container(
-                     
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                     padding: EdgeInsets.symmetric(vertical: 8.0),
                       child: TextFormField(
                         controller: inputDetail,
                         decoration: InputDecoration(
                           hintText: "Insert Text",
                           border: new OutlineInputBorder(
-                            
                           ),
                           ),
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
-                        
-                      ),
-                      
-                    ),
+                        ),
+                     ),
                     SizedBox(height: 8.0,),
                     Container(
                       width: double.infinity,
                       height: 40,
                       child: RaisedButton(
-                        onPressed:(){},
+                        onPressed: inputCtatan,
                         color: Colors.yellow[700],
                         child: Text("Save", style: TextStyle(color: Colors.white, fontSize: 17)),
                         ),
-                    
-                  
                     ),
-                  
+                    
                   ],
                 ),
-                
-                
-              ],
-              
+               ],
             ),
-            
-            ),
+        ),
       ),
     );
   }

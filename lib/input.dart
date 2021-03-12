@@ -1,9 +1,8 @@
-import 'dart:html';
 
-class File{
+class HimpunanNotes{
   String title, detail;
 
-  File(this.title,this.detail);
+  HimpunanNotes(this.title,this.detail);
 
   void setTitle(String newTitle){
     this.title = newTitle;
