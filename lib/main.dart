@@ -30,7 +30,8 @@ class _MyAppState extends State<MyApp> {
        _inputTitle = inputTitle.text;
       _inputDetail = inputDetail.text;
       //listHasilItem.add(HimpunanNotes("$listTitle", "$listDetail"));
-      listHasilItem.add("$_inputTitle" "$_inputDetail");
+      listHasilItem.add("$_inputTitle" 
+      "$_inputDetail");
     });
   }
 
@@ -78,6 +79,7 @@ class _MyAppState extends State<MyApp> {
                           border: new OutlineInputBorder(
                           ),
                           ),
+                         
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
                         ),
@@ -100,20 +102,25 @@ class _MyAppState extends State<MyApp> {
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
-                    Expanded(
-                      child: ListView(
-                        children: listHasilItem.map((String value) {
+                  ],
+                ),
+                Expanded(
+                     child: GridView.count(
+                       padding: const EdgeInsets.all(10),
+                       crossAxisSpacing: 16,
+                       mainAxisSpacing: 15,
+                       crossAxisCount: 2,
+                       children: listHasilItem.map((String value) {
                          return Container(
-                           margin: EdgeInsets.all(10),
+                           padding: const EdgeInsets.all(15),
                            child: Text(
                              value,
-                             style: TextStyle(fontSize: 17), 
-                             ),
+                             style: TextStyle(fontSize: 20, color: Colors.white),
+                           ),
+                           color: Colors.yellow[700],
                          );
-                    }).toList()
-                    ),
-                    ),
-                  ],
+                       }).toList(),
+                      ),
                 ),
                ],
             ),
