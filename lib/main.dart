@@ -92,7 +92,11 @@ class _MyAppState extends State<MyApp> {
                         child: Text("Save", style: TextStyle(color: Colors.white, fontSize: 17)),
                         ),
                     ),
-                    
+                    ListView(
+                      children: listHasilItem.map((){
+                        
+                      }),
+                    )
                   ],
                 ),
                ],
